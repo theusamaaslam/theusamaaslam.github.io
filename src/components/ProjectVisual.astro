@@ -1,0 +1,10 @@
+---
+import Signal from './Signal.astro';
+const {kind}=Astro.props;
+const waves=Array.from({length:45},(_,i)=>14+Math.abs(Math.sin(i*.69)*Math.cos(i*.21))*88);
+---
+{kind==='support'?<div class="support-cover-art" aria-hidden="true"><span class="cover-large-number">40<span>k</span></span><span class="cover-number-caption">support conversations / month</span><div class="support-cover-route"><span>WhatsApp</span><i></i><span>DSM</span><i></i><span>AI + human</span></div></div>
+:kind==='voice'?<div class="voice-cover-art" aria-hidden="true"><span class="voice-cover-title">A voice.<br/>A useful next step.</span><svg viewBox="0 0 480 120" class="voice-wave">{waves.map((h,i)=><rect x={i*10.5+4} y={60-h/2} width="3" height={h} rx="1.5"/>)}</svg><span class="voice-cover-caption">MCP tools · issue troubleshooting · real-time logs</span></div>
+:kind==='speech'?<div class="speech-cover-art" aria-hidden="true"><span lang="ur" dir="rtl" class="ghalib-word">غالب</span><span class="ghalib-subtitle">An Urdu voice, built with care.</span><div class="speech-cover-facts"><span>48 kHz</span><span>4 voice styles</span><span>Native streaming</span></div></div>
+:kind==='code'?<div class="code-cover-art" aria-hidden="true"><span class="code-orbit-label label-models">Models</span><span class="code-orbit-label label-tools">Enterprise tools</span><span class="code-orbit-label label-context">Project context</span><span class="code-orbit-label label-browser">Browser workflows</span><svg viewBox="0 0 600 320"><ellipse cx="300" cy="160" rx="180" ry="94"/><path d="M120 160H480M300 66V254"/><rect x="233" y="123" width="134" height="74" rx="9"/><circle cx="120" cy="160" r="5"/><circle cx="480" cy="160" r="5"/><circle cx="300" cy="66" r="5"/><circle cx="300" cy="254" r="5"/></svg><span class="code-core">NayaCode</span></div>
+:<Signal kind={kind} compact/>}

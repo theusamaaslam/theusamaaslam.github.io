@@ -22,7 +22,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={fullTitle} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={`${site.url}/og.png`} />
     <script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'Person',name:site.name,jobTitle:site.role,url:site.url,email:site.email,sameAs:[site.github,site.linkedin]})} />
   </head>
-  <body>
+  <body class={Astro.url.pathname==='/'?'home-page':undefined}>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="header shell">
       <a class="wordmark" href="/" aria-label="Usama Aslam, home"><span class="brand-mark" aria-hidden="true">u<span>.</span></span><span>Usama Aslam<span class="wordmark-role">AI systems engineer</span></span></a>

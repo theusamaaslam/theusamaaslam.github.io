@@ -1,0 +1,15 @@
+---
+import { homeSystem } from '../lib/home-system.mjs';
+import '../lib/anatomy/iso.css';
+---
+<figure class="home-system" data-home-system>
+  <div class="home-system-meta"><span>Fig. 01 / The work, connected</span></div>
+  <div class="home-system-art"><Fragment set:html={homeSystem()}/></div>
+  <div class="layer-controls" role="group" aria-label="Explore an engineering layer">
+    <button type="button" data-home-layer="0" aria-pressed="true">Conversation</button>
+    <button type="button" data-home-layer="1" aria-pressed="false">Intelligence</button>
+    <button type="button" data-home-layer="2" aria-pressed="false">Infrastructure</button>
+  </div>
+  <figcaption><p class="layer-description" aria-live="polite">Support and voice agents connect a customer’s question to knowledge, tools, and a useful next step.</p><a href="/work/customer-support/" class="home-system-link" data-home-case>Explore customer support <span aria-hidden="true">↗</span></a></figcaption>
+  <span class="home-system-note">Conceptual AI architecture · select a layer</span>
+</figure>

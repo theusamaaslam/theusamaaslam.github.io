@@ -20,6 +20,6 @@ export const furtherLearning=[
 ];
 export const achievements=[
   {label:'Team recognition',title:'Best Team Award',text:'Our team won the overall Best Team Award at Huawei’s AI Developer Golden Seed Training Program. The experience combined AI infrastructure, hands-on learning, and collaboration with teams from other industries.'},
-  {label:'Industry & community',title:'Back at IST, on the industry panel.',text:'I returned to my alma mater, the Institute of Space Technology, representing Nayatel at the IST Job Fair as part of the industry panel—sharing a professional perspective with the next generation of engineers.'},
+  {label:'Industry & community',title:'Back at IST, on the industry panel.',text:'I returned to my alma mater, the Institute of Space Technology, representing Nayatel at the IST Job Fair as part of the industry panel, sharing a professional perspective with the next generation of engineers.'},
   {label:'Communication & teaching',title:'Learning to make technical ideas clear.',text:'The Train the Trainer workshop strengthened how I communicate, present, and turn technical topics into engaging learning experiences. Explaining the work clearly is part of building systems people can use.'},
 ];
