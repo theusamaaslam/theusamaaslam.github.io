@@ -28,18 +28,18 @@ export const projects: Project[] = [
   {
     slug: 'customer-support', title: 'An answer is only the beginning.', category: 'Agents',
     label: 'Nayatel customer support', cover: 'support', color: 'sage',
-    summary: 'AI customer support built for up to 500,000 queries per day, with backend actions, human handover, and a central dashboard.',
+    summary: 'A WhatsApp support platform connecting LightRAG, legacy systems through MCP, and the DSM agent dashboard. Around 40,000 conversations every month.',
     scope: 'Collaborative engineering · Nayatel',
     context: 'Nayatel’s customers need support that understands their account, answers service questions, and helps resolve real issues. Support teams need the same conversation context, a central view of activity, and control over when an agent takes over.',
-    approach: 'My team and I built a WhatsApp AI support system connected to organizational knowledge, customer backends, and an omnichannel operations platform. It combines account and billing checks, troubleshooting, service requests, and automated follow-ups with a central dashboard for conversations, queues, assignment, and human handover.',
+    approach: 'My team and I built four connected components: LightRAG with custom-coded ingestion and retrieval, a central MCP server exposing legacy customer systems as tools, the WhatsApp chatbot, and DSM for human agents and reporting. Together, they connect knowledge-based answers with live customer checks, complex troubleshooting, and a practical human handover.',
     outcome: 'A production customer-support platform for Nayatel with capacity of up to 500,000 queries per day. AI assistance and human operations share a central dashboard, with connected workflows for customer checks, troubleshooting, backend actions, and human handover.',
-    metrics: [{value:'500,000',label:'Queries per day · up to'},{value:'AI + human',label:'Connected support workflow'},{value:'Central dashboard',label:'Conversations, queues & assignment'}],
+    metrics: [{value:'≈40,000',label:'Conversations per month'},{value:'4 components',label:'Knowledge · tools · chatbot · DSM'},{value:'AI + human',label:'One connected support workflow'}],
     features: ['WhatsApp customer support', 'Account and billing checks', 'Customer-issue troubleshooting', 'Knowledge-base answers', 'Backend service actions', 'Human-agent handover', 'Department routing and queues', 'Central support dashboard', 'Conversation assignment', 'Automated follow-ups'],
     notes: [
       ['Support that can take action', 'The assistant connects knowledge retrieval with customer-account checks and backend operations, helping customers move from a question toward a resolution.'],
       ['A connected human handover', 'Department routing, queues, and assignment connect automated support to the right team. Agents continue from the conversation context through the central dashboard.'],
       ['Operations in one place', 'The omnichannel platform brings conversations, handovers, and follow-ups into a shared workflow, giving support teams visibility beyond the model’s response.'],
-    ], stack: ['Python', 'RAG', 'WhatsApp', 'Backend tools', 'Omnichannel support'],
+    ], stack: ['Python', 'LightRAG', 'MCP', 'WhatsApp', 'DSM'],
   },
   {
     slug: 'naya-voice', title: 'Voice support that can act.', category: 'Agents',

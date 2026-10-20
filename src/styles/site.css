@@ -29,3 +29,4 @@
 @media(max-width:1100px){.about-grid{gap:45px;grid-template-columns:1fr 1.2fr}}
 @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:34px}.about-portrait{margin-top:28px;max-width:420px}.about-portrait figcaption{font-size:12px}.about-heading h2{font-size:43px}.career-journey{margin-top:29px;padding-left:23px}.career-journey li{padding-left:7px;padding-bottom:25px}.career-journey li::before{left:-24px}.journey-stage h3{font-size:19px}.career-journey li>p:last-child,.journey-together p{font-size:14px}.journey-together{padding-top:22px}}
 @view-transition{navigation:auto}
+.skip-link{clip-path:inset(50%)}.skip-link:focus{clip-path:none}

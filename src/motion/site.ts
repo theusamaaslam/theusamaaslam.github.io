@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import Lenis from 'lenis';
+import { mountSupport } from './support';
 let started = false;
 let dispose: (() => void) | undefined;
 const descriptions = [
@@ -11,6 +12,7 @@ const descriptions = [
 function onPage() {
   dispose?.();
   const cleanups: (()=>void)[]=[];
+  cleanups.push(mountSupport());
   const media = matchMedia('(prefers-reduced-motion: reduce)');
   let lenis: Lenis | undefined;
   let animationContext: gsap.Context | undefined;
