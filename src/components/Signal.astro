@@ -1,0 +1,38 @@
+---
+const { kind = 'system', compact = false } = Astro.props;
+const stages = kind === 'voice' ? ['Caller', 'LiveKit', 'Agent', 'Tools'] : kind === 'memory' ? ['Episodes', 'Claims', 'Recall', 'Context'] : kind === 'graph' ? ['Source', 'Index', 'Graph', 'Agent'] : kind === 'speech' ? ['Listen', 'Understand', 'Speak', 'Urdu'] : kind === 'prediction' ? ['History', 'Features', 'Model', 'Risk'] : kind === 'analytics' ? ['Signals', 'Scores', 'Analysis', 'Action'] : kind === 'code' ? ['Intent', 'Model', 'Tools', 'Build'] : ['People', 'Agents', 'Knowledge', 'Systems'];
+const routes:Record<string,string> = {
+  system:'M70 205H180V99H300V205H410V311H530',
+  support:'M70 205H180V99H300V205H410V311H530',
+  voice:'M70 205H120L135 170L150 240L165 145L180 265L195 185L210 225L225 205H300H410V311H530',
+  code:'M70 205H180Q205 205 205 180V124Q205 99 230 99H300V205H410V311H530',
+  memory:'M70 205C70 65 300 65 300 99C490 99 490 311 410 311C300 390 180 311 180 205H300H530',
+  graph:'M70 205L180 99L300 205L410 99L530 205L410 311L300 205L180 311L70 205',
+  speech:'M70 205H110L122 190L134 220L146 160L158 250L170 135L182 275L194 160L206 250L218 185L230 225L242 205H300H410V311H530',
+  analytics:'M70 280H140V250H210V205H280V160H350V115H410V99H530',
+  prediction:'M70 290C160 290 165 250 230 250S330 120 410 120S480 99 530 99',
+};
+const route=routes[kind]??routes.system;
+---
+<svg class:list={['signal-figure', { compact }]} viewBox="0 0 600 410" fill="none" role="img" aria-label={`${stages.join(' to ')}: conceptual system diagram`}>
+  <defs>
+    <pattern id={`grid-${kind}`} width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="currentColor" opacity=".13" /></pattern>
+  </defs>
+  <rect width="600" height="410" fill={`url(#grid-${kind})`} />
+  {(kind==='system'||kind==='support')&&<g class="signal-wires" stroke="currentColor" stroke-width="1.5" opacity=".22">
+    <path d="M70 205H180V99H410V205H530M180 205V311H410V205H530" />
+    <path d="M300 99V311M70 205H530" />
+  </g>}
+  {kind==='code'&&<g stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"><path d="M180 205H410V99H530M205 205V311H300V205"/><path d="M275 190l-17 15 17 15m50-30 17 15-17 15" stroke-width="3"/></g>}
+  {kind==='memory'&&<g stroke="currentColor" stroke-opacity=".2"><ellipse cx="300" cy="205" rx="185" ry="110"/><ellipse cx="300" cy="205" rx="105" ry="155" transform="rotate(35 300 205)"/><path d="M180 99L410 311M70 205H530"/></g>}
+  {kind==='graph'&&<g stroke="currentColor" stroke-opacity=".25"><path d="M70 205H530M180 99H410L180 311H410L180 99M180 99L410 311M410 99V311"/><circle cx="180" cy="99" r="30"/><circle cx="410" cy="311" r="30"/><circle cx="300" cy="205" r="60"/></g>}
+  {(kind==='voice'||kind==='speech')&&<g stroke="currentColor" stroke-opacity=".22"><path d="M70 155H242M70 255H242M300 100V310M410 100V310"/><circle cx="300" cy="205" r="55"/><circle cx="300" cy="205" r="73" stroke-dasharray="2 5"/></g>}
+  {kind==='analytics'&&<g stroke="currentColor" stroke-opacity=".3" fill="currentColor" fill-opacity=".07"><path d="M70 80V312H530" fill="none"/>{[60,95,135,175,220].map((h:number,i:number)=><rect x={105+i*78} y={312-h} width="40" height={h} rx="3"/>)}</g>}
+  {kind==='prediction'&&<g stroke="currentColor" stroke-opacity=".2"><path d="M70 80V312H530"/><path d="M70 260C180 260 210 200 285 180S420 70 530 65M70 315C180 315 230 290 285 240S420 170 530 145" stroke-dasharray="4 6"/>{[[110,290],[160,255],[210,275],[260,205],[290,230],[340,150],[380,175],[430,105],[470,125],[510,80]].map(([x,y])=><circle cx={x} cy={y} r="5" fill="currentColor" fill-opacity=".35"/>)}</g>}
+  <path class="signal-route" d={route} stroke="var(--signal-color, #b73b15)" stroke-width="3" />
+  {(kind==='system'||kind==='support')&&<g class="signal-orbits" stroke="currentColor" stroke-width="1" opacity=".2"><circle cx="300" cy="205" r="63"/><circle cx="300" cy="205" r="82"/><circle cx="300" cy="205" r="100" stroke-dasharray="3 7"/></g>}
+  {!['analytics','prediction','graph','code'].includes(kind)&&<g class="signal-node"><rect x="253" y="172" width="94" height="66" rx="10" fill="var(--node-bg, #f3f4ef)" stroke="currentColor" stroke-opacity=".35"/><path d="M280 205h40m-20-20v40" stroke="var(--signal-color, #b73b15)" stroke-width="2"/><circle cx="300" cy="205" r="9" fill="var(--node-bg, #f3f4ef)" stroke="var(--signal-color, #b73b15)" stroke-width="2"/></g>}
+  <g fill="var(--node-bg, #f3f4ef)" stroke="var(--signal-color, #b73b15)" stroke-width="2">{kind==='graph'?[[70,205],[180,99],[300,205],[410,99],[410,311],[180,311],[530,205]].map(([x,y])=><circle cx={x} cy={y} r="8"/>):kind==='analytics'||kind==='prediction'?<><circle cx="70" cy={kind==='analytics'?280:290} r="7"/><circle cx="530" cy="99" r="7"/></>:<><circle cx="70" cy="205" r="8"/><circle cx="530" cy={kind==='memory'?205:311} r="8"/></>}</g>
+  <g fill="currentColor" font-family="monospace" font-size="14" letter-spacing=".4"><text x="42" y="355">{stages[0]}</text><text x="155" y="55">{stages[1]}</text><text x="345" y="355">{stages[2]}</text><text x="485" y="55">{stages[3]}</text></g>
+  <circle class="signal-packet" cx="70" cy="205" r="5" fill="var(--signal-color, #b73b15)" />
+</svg>

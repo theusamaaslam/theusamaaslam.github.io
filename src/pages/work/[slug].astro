@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import Signal from '../../components/Signal.astro';
+import { projects } from '../../data/site';
+export function getStaticPaths(){return projects.map((project,i)=>({params:{slug:project.slug},props:{project,next:projects[(i+1)%projects.length]}}));}
+const {project:p,next} = Astro.props;
+---
+<Base title={p.label} description={p.summary}>
+  <article class="case shell"><a class="back-link" href="/#work"><span aria-hidden="true">↖</span> All work</a><header class="case-header"><p class="section-kicker">{p.label}</p><h1>{p.title}</h1><p class="case-summary">{p.summary}</p><div class="case-meta"><span>{p.scope}</span><span>{p.category}</span></div></header><figure class:list={['case-figure',p.color]}><Signal kind={p.cover}/><figcaption>Conceptual system view · {p.label}</figcaption></figure><div class="case-story"><section><h2>The context</h2><p>{p.context}</p></section><section><h2>The approach</h2><p>{p.approach}</p></section></div><section class="case-notes"><h2>Engineering details that matter.</h2><div>{p.notes.map(([heading,text])=><section><h3>{heading}</h3><p>{text}</p></section>)}</div></section><section class="case-outcome"><div><p class="section-kicker">The result</p><h2>What the work<br/>adds up to.</h2></div><div><p>{p.outcome}</p><div class="tags">{p.stack.map(s=><span>{s}</span>)}</div>{p.link&&<a class="text-link" href={p.link} target="_blank" rel="noopener noreferrer">{p.linkLabel}<span aria-hidden="true"> ↗</span></a>}</div></section><a class="next-project" href={`/work/${next.slug}/`}><span>Next case study</span><h2>{next.label}</h2><span class="next-arrow" aria-hidden="true">↗</span></a></article>
+</Base>
