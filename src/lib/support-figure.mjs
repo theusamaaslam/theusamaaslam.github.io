@@ -32,7 +32,7 @@ export function supportFigure() {
   for(let i=0;i<3;i++){
     cabinet+=S(-198,7,76,3,30+i*27,22,'drawer');
     cabinet+=S(-173,10,26,4,40+i*27,3,'handle');
-    cabinet+=S(-193,-52+i*5,61,41,116+i*2.5,2,'document');
+    cabinet+=S(-193,-52+i*5,61,41,116+i*2,2,'document');
   }
   cabinet+=k.dotsSvg([at([-197,10,110]),at([-124,10,110])],{size:1,tone:'hi'});
   add('rag',[-160,-28,70],cabinet);
