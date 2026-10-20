@@ -24,7 +24,9 @@ function onPage() {
     observer?.disconnect();
     animationContext?.revert();
     if(media.matches) return;
-    lenis = new Lenis({duration:0.85, smoothWheel:true, anchors:true});
+    // Section links use native hash navigation; competing anchor handlers can
+    // update the URL while leaving Lenis at the previous scroll position.
+    lenis = new Lenis({duration:0.85, smoothWheel:true, anchors:false});
     tick=(time)=>lenis?.raf(time*1000);
     gsap.ticker.add(tick);
     animationContext=gsap.context(()=>{
@@ -90,6 +92,8 @@ function onPage() {
 }
 export function start(){
   if(started)return;started=true;
-  document.addEventListener('astro:page-load',onPage);
-  document.addEventListener('astro:before-swap',()=>dispose?.());
+  // Static pages keep navigation and scroll restoration with the browser.
+  onPage();
+  window.addEventListener('pagehide',()=>dispose?.());
+  window.addEventListener('pageshow',event=>{if(event.persisted)onPage();});
 }
