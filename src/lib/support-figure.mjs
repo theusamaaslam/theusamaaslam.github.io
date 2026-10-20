@@ -23,7 +23,7 @@ export function supportFigure() {
     const path=k.pathOf(route.map(at));
     const [a,b]=[route[1],route[2]].map(at),dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy),ux=dx/len,uy=dy/len;
     const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;
-    const arrow=k.pathOf([[mx+ux*6,my+uy*6],[mx-ux*5-uy*3.5,my-uy*5+ux*3.5],[mx-ux*5+uy*3.5,my-uy*5-ux*3.5]],true);
+    const arrow=k.pathOf([[mx+ux*10,my+uy*10],[mx-ux*7-uy*6,my-uy*7+ux*6],[mx-ux*7+uy*6,my-uy*7-ux*6]],true);
     return `<g>${dots}<path class="iso-line support-route" data-route="${i}" d="${path}"/><path class="route-arrow" d="${arrow}"/><circle class="support-pulse" data-pulse-route="${i}" r="4" cx="${at(route[0])[0]}" cy="${at(route[0])[1]}"/></g>`;
   }).join('');
   const assemblies=[];
