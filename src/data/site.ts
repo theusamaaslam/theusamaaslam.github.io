@@ -1,5 +1,5 @@
 // Facts come from the owner's project documents and conversations. No fictional projects,
-// dates, client testimonials, performance claims, email addresses, or credentials.
+// dates, client testimonials, or credentials. Capacity is owner-reported, not daily usage.
 export const site = {
   name: 'Muhammad Usama Aslam', shortName: 'Usama Aslam',
   role: 'AI systems & inference engineer',
@@ -7,54 +7,61 @@ export const site = {
   description: 'Usama Aslam builds production AI systems, from conversational agents and knowledge retrieval to model inference and the infrastructure underneath.',
   github: 'https://github.com/theusamaaslam',
   linkedin: 'https://www.linkedin.com/in/theusamaaslam/',
+  email: 'usamaaslam081@gmail.com',
 };
 export type Project = {
   slug: string; title: string; category: 'Agents' | 'Platforms' | 'Intelligence';
   label: string; summary: string; context: string; approach: string;
   outcome: string; notes: [string, string][]; stack: string[];
   scope: string; cover: string; color: string; link?: string; linkLabel?: string;
+  metrics?: { value: string; label: string }[];
+  features?: string[];
 };
 export const projects: Project[] = [
   {
     slug: 'customer-support', title: 'An answer is only the beginning.', category: 'Agents',
     label: 'Nayatel customer support', cover: 'support', color: 'sage',
-    summary: 'Customer support over WhatsApp, connected to organizational knowledge, backend operations, and human teams.',
+    summary: 'AI customer support built for up to 500,000 queries per day, with backend actions, human handover, and a central dashboard.',
     scope: 'Collaborative engineering · Nayatel',
-    context: 'A useful customer-support assistant needs more than a good response. It needs account context, reliable delivery, access to the right backend operations, and a clear path to a human when the conversation needs one.',
-    approach: 'My team and I built a WhatsApp support chatbot for Nayatel, connected to an omnichannel support platform. Knowledge retrieval and backend integrations sit alongside department routing, queues, assignment, human handover, and follow-ups.',
-    outcome: 'A production customer-support system for Nayatel. A documented stress test covered 5,000 requests, with a highest tested incoming load of 5 requests per second. These are test observations, not a claim of sustained production throughput.',
+    context: 'Nayatel’s customers need support that understands their account, answers service questions, and helps resolve real issues. Support teams need the same conversation context, a central view of activity, and control over when an agent takes over.',
+    approach: 'My team and I built a WhatsApp AI support system connected to organizational knowledge, customer backends, and an omnichannel operations platform. It combines account and billing checks, troubleshooting, service requests, and automated follow-ups with a central dashboard for conversations, queues, assignment, and human handover.',
+    outcome: 'A production customer-support platform for Nayatel with capacity of up to 500,000 queries per day. AI assistance and human operations share a central dashboard, with connected workflows for customer checks, troubleshooting, backend actions, and human handover.',
+    metrics: [{value:'500,000',label:'Queries per day · up to'},{value:'AI + human',label:'Connected support workflow'},{value:'Central dashboard',label:'Conversations, queues & assignment'}],
+    features: ['WhatsApp customer support', 'Account and billing checks', 'Customer-issue troubleshooting', 'Knowledge-base answers', 'Backend service actions', 'Human-agent handover', 'Department routing and queues', 'Central support dashboard', 'Conversation assignment', 'Automated follow-ups'],
     notes: [
-      ['One conversation, multiple systems', 'The assistant, delivery platform, knowledge base, and backend operations each need explicit failure handling. A generated answer is not proof that a message reached the customer.'],
-      ['A useful human handover', 'Department routing and queues connect automated support to the people who can resolve the next part of the request.'],
-      ['Evidence before diagnosis', 'Production investigation separated application timeouts and session-lock failures from DNS and network transport errors. Concurrent logs and reproducible checks made that distinction useful.'],
+      ['Support that can take action', 'The assistant connects knowledge retrieval with customer-account checks and backend operations, helping customers move from a question toward a resolution.'],
+      ['A connected human handover', 'Department routing, queues, and assignment connect automated support to the right team. Agents continue from the conversation context through the central dashboard.'],
+      ['Operations in one place', 'The omnichannel platform brings conversations, handovers, and follow-ups into a shared workflow, giving support teams visibility beyond the model’s response.'],
     ], stack: ['Python', 'RAG', 'WhatsApp', 'Backend tools', 'Omnichannel support'],
   },
   {
-    slug: 'naya-voice', title: 'Conversation has a runtime.', category: 'Agents',
-    label: 'Naya Voice / billing voicebot', cover: 'voice', color: 'dark',
-    summary: 'A LiveKit voice-agent system connecting live calls, workflow state, knowledge, and customer operations.',
+    slug: 'naya-voice', title: 'Voice support that can act.', category: 'Agents',
+    label: 'NayaVoice', cover: 'voice', color: 'dark',
+    summary: 'A real-time voice AI platform that checks customer accounts, troubleshoots service issues, and acts through connected MCP tools.',
     scope: 'Voice-agent architecture & reliability · Nayatel',
-    context: 'Voice makes system behavior immediate. A slow tool becomes dead air; a lost handoff becomes a repeated question. Cost controls must preserve the caller’s context and the correctness of backend actions.',
-    approach: 'The platform combines SIP calling and LiveKit audio with a Python runtime, topic-specific agents, Gemini sessions, MCP tools, and LightRAG. Structured call state helps preserve identity, verification, and known facts as conversations move between workflow steps.',
-    outcome: 'The work includes runtime review, cost and context analysis, and an end-to-end failure-benchmark plan. A target of 15 concurrent calls is a benchmark objective, not a published capacity result.',
+    context: 'A customer calling about a real service issue needs more than a scripted response. The voice agent must verify context, check live information, follow a troubleshooting workflow, and connect the caller to a person when needed.',
+    approach: 'NayaVoice combines SIP telephony and LiveKit audio with configurable agent workflows, knowledge retrieval, and MCP connectivity to customer systems. Agents can check account information, investigate customer issues, and invoke backend tools while structured state carries verification, facts, and actions across the call.',
+    outcome: 'A voice-agent platform for customer-service workflows, with live backend connectivity, real-time logging, call transcripts, recordings, and human transfer. Context and cost controls support longer conversations without repeatedly asking for the same information.',
+    features: ['Real-time voice conversations', 'Customer-account checks', 'Service-issue troubleshooting', 'MCP connectivity to backend tools', 'Knowledge-base retrieval', 'Configurable agent workflows', 'Real-time logs and call tracing', 'Transcripts and call recordings', 'Human-agent call transfer', 'Context and cost management'],
     notes: [
-      ['Context with boundaries', 'Scoped prompts and tools keep each step focused. Session refreshes and summaries manage retained context while the Python runtime carries structured call facts.'],
-      ['Writes need stronger guarantees', 'A timeout can leave a backend action in an unknown state. Idempotency, explicit outcomes, and reconciliation matter as much as retries.'],
-      ['Measure the whole call', 'Call admission, greeting delay, tool latency, handoff, transfer, recordings, and shutdown all belong in the reliability picture.'],
+      ['Troubleshooting through real tools', 'MCP connections let the agent check live customer information and use backend operations as part of a guided troubleshooting conversation.'],
+      ['Continuity across the call', 'Scoped prompts, tool sets, summaries, and structured call state preserve relevant facts as the conversation moves between workflow steps.'],
+      ['See what happened in real time', 'Logs, tool activity, transcripts, and recordings help operators follow a call and investigate what the agent checked, said, or attempted.'],
     ], stack: ['LiveKit', 'Python', 'Gemini', 'MCP', 'LightRAG', 'SIP'],
   },
   {
-    slug: 'nayacode', title: 'A coding agent, made into a product.', category: 'Platforms',
+    slug: 'nayacode', title: 'One AI harness. Across the organization.', category: 'Platforms',
     label: 'NayaCode', cover: 'code', color: 'peach',
-    summary: 'A branded Windows AI application, with model access, MCP integrations, browser tools, and a real release process.',
+    summary: 'An organization-wide AI harness connecting models, enterprise tools, browser workflows, and project context in one desktop workspace.',
     scope: 'Product engineering & desktop delivery · Nayatel',
-    context: 'Turning an agent codebase into a usable desktop product means working through the details: provider discovery, credentials, branding, browser behavior, installation paths, updates, and conversation continuity.',
-    approach: 'NayaCode work spans Windows packaging, Nayatel LiteLLM integration, guided MCP connections, browser functionality, and GitHub releases. Related work explores new upstream foundations while retaining a consistent product identity.',
-    outcome: 'Windows installer releases and a continuing NayaCode V2 effort. The work includes application branding, English-language surfaces, repository cleanup, browser fixes, and fresh-install behavior.',
+    context: 'Teams need a practical way to use AI with the models, projects, and tools their organization already relies on. A shared AI harness brings those capabilities into a consistent workspace for engineering and broader organizational workflows.',
+    approach: 'NayaCode brings Nayatel’s model gateway, MCP integrations, browser tools, and project-aware agent workflows into a Windows desktop application. Guided connections to tools such as Jira and GitHub extend the agent beyond chat, while protected credentials and a consistent installation experience support organizational use.',
+    outcome: 'A desktop AI harness designed for organization-wide use, combining model choice, enterprise-tool connectivity, browser automation, and interactive outputs. Windows releases and the continuing V2 effort turn those capabilities into an installable product.',
+    features: ['Organization-wide AI workspace', 'Multiple models through LiteLLM', 'Guided MCP integrations', 'Jira and GitHub connectivity', 'Browser tools and automation', 'Project-aware conversations', 'Context continuity through tool calls', 'Protected provider credentials', 'Interactive charts and tables', 'Windows installers and updates'],
     notes: [
-      ['Integration over decoration', 'Model discovery and MCP connections make the desktop application useful in an existing engineering environment.'],
-      ['Continuity after tools', 'An agent needs to carry the original request through tool calls and follow-up responses. Request tracking and context behavior are part of product quality.'],
-      ['Shipping is engineering', 'Installer metadata, application data, upgrade compatibility, and release verification all affect the user’s first experience.'],
+      ['One workspace, connected capabilities', 'Shared model access and MCP connections bring organization tools into the same agent workflow instead of isolating AI in a separate chat window.'],
+      ['From a request to useful output', 'Browser actions, tool calls, charts, and tables let teams work with information and carry a request through multiple steps.'],
+      ['Built for desktop delivery', 'Protected credentials, consistent branding, installers, and release updates make deployment and everyday use part of the product.'],
     ], stack: ['Electron', 'TypeScript', 'LiteLLM', 'MCP', 'Windows'],
   },
   {
@@ -87,18 +94,21 @@ export const projects: Project[] = [
     ], stack: ['TypeScript', 'Fastify', 'PostgreSQL', 'MCP', 'Docker'],
   },
   {
-    slug: 'urdu-speech', title: 'Making the voice speak Urdu.', category: 'Intelligence',
-    label: 'Urdu speech / NayaTTS', cover: 'speech', color: 'sand',
-    summary: 'Connecting Urdu speech synthesis and recognition to conversational agents, with practical attention to audio formats and playback.',
-    scope: 'Speech integration & experimentation',
-    context: 'A speech model endpoint is only one part of a voice agent. Its response format, sample rate, streaming behavior, pronunciation, and interruption handling all affect the conversation.',
-    approach: 'The work includes Ghalib and NayaTTS adapters for LiveKit, Faster-Whisper recognition, and Gemini conversation. A Qwen3-TTS-based Urdu voice is connected through a dedicated adapter rather than assuming every synthesis service shares an API.',
-    outcome: 'Working agent scripts and TTS integration checks, including real synthesis delivered as LiveKit audio frames. The work also examines model references and Urdu conversational behavior.',
+    slug: 'urdu-speech', title: 'Ghalib. A voice built for Urdu.', category: 'Intelligence',
+    label: 'Ghalib', cover: 'speech', color: 'sand',
+    summary: 'My Urdu text-to-speech model and inference package, with native audio streaming, expressive voice styles, and built-in pronunciation processing.',
+    scope: 'Model development & speech systems',
+    context: 'Urdu customer conversations mix ordinary language with account details, numbers, and English technical terms. A useful speech system needs a consistent voice, control over tone, and an inference path that can deliver audio to a live conversation.',
+    approach: 'I built Ghalib as an Urdu speech model and inference package. Its Hugging Face release bundles the model weights, tokenizer, vocoder, speaker encoder, voice-style references, runtime, and pronunciation processor. Python and HTTP interfaces support complete WAV output or native incremental audio streaming.',
+    outcome: 'Ghalib produces mono 48 kHz speech with firm, neutral, warm, and empathetic styles. Its runtime supports native streaming, pronunciation-dictionary updates, bounded request admission, and isolated model workers. LiveKit integration reframes the streamed PCM into audio frames for conversational playback.',
+    metrics: [{value:'48 kHz',label:'Mono speech output'},{value:'4 styles',label:'Firm · neutral · warm · empathetic'},{value:'Native streaming',label:'Incremental audio from one session'}],
+    features: ['Urdu text-to-speech model', 'Native incremental audio streaming', 'Four bundled voice styles', 'Automatic pronunciation processing', 'Technical-word and number normalization', 'Python inference API', 'HTTP speech endpoint', 'WAV and 16-bit PCM output', 'Isolated parallel model workers', 'LiveKit audio integration'],
     notes: [
-      ['Honor the audio contract', 'Sample rate, channels, encoding, and service behavior need to match the playback pipeline.'],
-      ['Adapters make differences explicit', 'Separate speech services can require different request payloads and synthesis handling even when both return audio.'],
-      ['Test what a caller hears', 'Actual generated speech through the runtime is stronger evidence than a healthy HTTP endpoint alone.'],
-    ], stack: ['Urdu TTS', 'LiveKit', 'Qwen3-TTS', 'vLLM-Omni', 'Faster-Whisper'],
+      ['Stream one acoustic session', 'The full text is supplied once, then audio is emitted incrementally. This preserves one synthesis session rather than joining separately generated phrases.'],
+      ['Pronunciation lives in the package', 'A bundled dictionary processes approved technical terms, numbers, and punctuation while preserving ordinary Urdu script. Changes are validated and picked up by the processor.'],
+      ['Connect the model to the conversation', 'The runtime produces 48 kHz mono audio. Streaming PCM can be reframed into 20 ms LiveKit frames, while isolated model workers and bounded queues make concurrent inference explicit.'],
+    ], stack: ['Ghalib', 'Urdu TTS', 'PyTorch', 'Native streaming', 'LiveKit'],
+    link: 'https://huggingface.co/theusamaaslam/ghalib', linkLabel: 'View Ghalib on Hugging Face',
   },
   {
     slug: 'customer-intelligence', title: 'Customer signals, made useful.', category: 'Intelligence',

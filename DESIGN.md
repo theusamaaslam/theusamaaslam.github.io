@@ -40,3 +40,6 @@ Removed terminal-window mockups, fake chat screenshots, skill percentage bars, t
 
 ## Content assumptions
 Professional positioning is an editorial summary, not an invented official title. Nayatel team projects use collaborative wording. Case studies describe known design concerns without implying every requested improvement shipped. Contact uses confirmed social profiles; no inferred email is published. No placeholders are necessary. Work status and employment dates are deliberately omitted because they were not verified.
+
+## Owner-supplied content update
+The owner supplied their email, a customer-support capacity of up to 500,000 queries/day, NayaVoice troubleshooting and logging capabilities, and NayaCode's organization-wide AI harness positioning. Present capacity as capacity, not usage. Ghalib replaces the earlier speech case-study identity; its model card confirms 48 kHz mono output, native audio streaming, four styles, built-in pronunciation processing, Python/HTTP interfaces, and bounded parallel workers. Link to the model on Hugging Face without implying public weight access. Preserve the existing speech case URL. Use optional metric and capability sections only where the source content supports them.
