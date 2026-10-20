@@ -9,6 +9,13 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/theusamaaslam/',
   email: 'usamaaslam081@gmail.com',
 };
+export const journey = [
+  { stage: 'Electrical engineering', lens: 'Learn to think in systems', text: 'Electrical engineering gave me a foundation in signals, interconnected components, and structured problem-solving. I learned to break a complex system into parts while keeping the whole picture in view.' },
+  { stage: 'TAC', lens: 'Start with the customer’s problem', text: 'In TAC, engineering met the person using the service. Troubleshooting taught me to listen carefully, ask useful questions, and turn a vague symptom into a problem I could investigate. That perspective shapes the support agents I build today.' },
+  { stage: 'NOC', lens: 'See the network behind the symptom', text: 'Moving into NOC widened my view from an individual issue to the network carrying it. I learned to trace dependencies, read operational signals, and think about availability and the impact of a failure across a connected system.' },
+  { stage: 'Systems', lens: 'Understand what keeps it running', text: 'Systems work brought me closer to servers, operating systems, deployments, and the services underneath an application. That foundation helps me reason about model serving, containers, resource constraints, and production reliability.' },
+  { stage: 'AI systems & inference', lens: 'Bring every layer together', text: 'Today, I bring those perspectives into agents, retrieval, Urdu speech, model inference, and AI platforms at Nayatel. The customer’s experience, the model’s behavior, and the infrastructure’s limits all belong in the same engineering decision.' },
+];
 export type Project = {
   slug: string; title: string; category: 'Agents' | 'Platforms' | 'Intelligence';
   label: string; summary: string; context: string; approach: string;
