@@ -3,13 +3,14 @@ import Base from '../../layouts/Base.astro';
 import Signal from '../../components/Signal.astro';
 import SupportArchitecture from '../../components/SupportArchitecture.astro';
 import SupportImpact from '../../components/SupportImpact.astro';
+import SupportHighlights from '../../components/SupportHighlights.astro';
 import { projects } from '../../data/site';
 export function getStaticPaths(){return projects.map((project,i)=>({params:{slug:project.slug},props:{project,next:projects[(i+1)%projects.length]}}));}
 const {project:p,next} = Astro.props;
 ---
 <Base title={p.label} description={p.summary}>
-  <article class="case shell"><a class="back-link" href="/#work"><span aria-hidden="true">↖</span> All work</a><header class="case-header"><p class="section-kicker">{p.label}</p><h1>{p.title}</h1><p class="case-summary">{p.summary}</p><div class="case-meta"><span>{p.scope}</span><span>{p.category}</span></div></header>
-    {p.metrics&&<dl class="case-metrics">{p.metrics.map(m=><div><dt>{m.label}</dt><dd>{m.value}</dd></div>)}</dl>}
+  <article class="case shell"><a class="back-link" href="/#work"><span aria-hidden="true">↖</span> All work</a><header class="case-header"><p class="section-kicker">{p.label}</p><h1>{p.title}</h1>{p.slug==='customer-support'&&<SupportHighlights/>}<p class="case-summary">{p.summary}</p><div class="case-meta"><span>{p.scope}</span><span>{p.category}</span></div></header>
+    {p.metrics&&p.slug!=='customer-support'&&<dl class="case-metrics">{p.metrics.map(m=><div><dt>{m.label}</dt><dd>{m.value}</dd></div>)}</dl>}
     {p.slug==='customer-support'?<SupportArchitecture/>:<figure class:list={['case-figure',p.color]}><Signal kind={p.cover}/><figcaption>Conceptual system view · {p.label}</figcaption></figure>}<div class="case-story"><section><h2>The context</h2><p>{p.context}</p></section><section><h2>The approach</h2><p>{p.approach}</p></section></div>
     {p.slug==='customer-support'&&<SupportImpact/>}
     {p.features&&<section class="case-features"><div><p class="section-kicker">Platform capabilities</p><h2>What it can do.</h2></div><ul>{p.features.map(feature=><li><span aria-hidden="true">↗</span>{feature}</li>)}</ul></section>}

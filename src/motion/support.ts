@@ -13,16 +13,16 @@ export function mountSupport() {
   const play=root.querySelector<HTMLButtonElement>('[data-walk-play]')!;
   const select=root.querySelector<HTMLSelectElement>('#support-scenario')!;
   const scenarios:Record<string,[string,string][]>={
-    knowledge:[['chat','Chatbot receives the customer’s service question.'],['rag','LightRAG retrieves relevant organizational knowledge.'],['chat','Chatbot uses that context to explain the next step.']],
-    troubleshoot:[['chat','Chatbot gathers the customer’s symptoms and context.'],['rag','Custom retrieval supplies relevant troubleshooting knowledge.'],['mcp','Central MCP tools check live customer systems.'],['chat','Chatbot combines the findings and guides troubleshooting.']],
-    handover:[['chat','Chatbot establishes the customer’s issue.'],['mcp','Connected tools help investigate the issue.'],['dsm','The conversation passes to a human agent in DSM.'],['dsm','The team continues with shared context, queues, and reporting.']],
+    knowledge:[['dsm','DSM receives the customer’s WhatsApp message.'],['chat','DSM routes the question to the support chatbot.'],['rag','LightRAG retrieves relevant organizational knowledge.'],['chat','Chatbot uses that context to prepare the response.'],['dsm','The reply reaches the customer through DSM and WhatsApp.']],
+    troubleshoot:[['dsm','DSM receives and routes the WhatsApp conversation.'],['chat','Chatbot gathers the customer’s symptoms and context.'],['rag','Custom retrieval supplies relevant troubleshooting knowledge.'],['mcp','Central MCP tools check live customer systems.'],['chat','Chatbot combines the findings and guides troubleshooting.'],['dsm','DSM delivers the response and retains the conversation context.']],
+    handover:[['dsm','DSM receives the customer’s WhatsApp conversation.'],['chat','Chatbot establishes the issue and attempts to help.'],['mcp','Connected tools help investigate the customer’s issue.'],['dsm','DSM assigns the conversation to a human agent.'],['dsm','The agent continues with shared context, queues, and reporting.']],
   };
   let step=0,playing=false,visible=false,last=0,elapsed=0,active='chat',visibilityAt=-1;
   const activate=(id:string)=>{
     active=id;
     buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.component===id)));
     details.forEach(panel=>panel.hidden=panel.dataset.componentDetail!==id);
-    parts.forEach(part=>part.toggleAttribute('data-active',part.dataset.machinePart===id));
+    parts.forEach(part=>{part.toggleAttribute('data-active',part.dataset.machinePart===id);part.setAttribute('aria-pressed',String(part.dataset.machinePart===id));});
     const button=buttons.find(b=>b.dataset.component===id)!;
     readout.textContent=`${button.querySelector('span')!.textContent} / ${button.childNodes[1].textContent}`;
   };
@@ -40,13 +40,18 @@ export function mountSupport() {
   };
   const listen=(el:EventTarget,type:string,action:EventListener)=>{el.addEventListener(type,action);cleanup.push(()=>el.removeEventListener(type,action));};
   buttons.forEach(button=>listen(button,'click',()=>{setPlay(false);activate(button.dataset.component!);}));
+  parts.forEach(part=>{
+    const action=()=>{setPlay(false);activate(part.dataset.machinePart!);};
+    listen(part,'click',action);
+    listen(part,'keydown',event=>{const key=(event as KeyboardEvent).key;if(key==='Enter'||key===' '){event.preventDefault();action();}});
+  });
   listen(select,'change',()=>{setPlay(false);step=0;showStep();});
   listen(root.querySelector('[data-walk-next]')!,'click',()=>{setPlay(false);step=(step+1)%scenarios[select.value].length;showStep();});
   listen(play,'click',()=>{if(media.matches){step=(step+1)%scenarios[select.value].length;showStep();}else setPlay(!playing);});
   const onMotion=()=>{if(media.matches)setPlay(false);play.textContent=media.matches?'Advance walkthrough':playing?'Pause walkthrough':'Play walkthrough';};
   listen(media,'change',onMotion);onMotion();showStep();
-  const paths=[...root.querySelectorAll<SVGPathElement>('[data-route]')];
   const pulses=[...root.querySelectorAll<SVGCircleElement>('[data-pulse-route]')];
+  const paths=pulses.map(pulse=>pulse.closest('svg')!.querySelector<SVGPathElement>(`[data-route="${pulse.dataset.pulseRoute}"]`)!);
   const lengths=paths.map(path=>path.getTotalLength());
   const tick=(time:number)=>{
     // Recheck bounds sparingly: the panel height changes as components are selected.
@@ -57,8 +62,9 @@ export function mountSupport() {
     if(motion&&playing){elapsed+=delta;if(elapsed>5.5){elapsed=0;step=(step+1)%scenarios[select.value].length;showStep();}}
     const route=active==='rag'?0:active==='mcp'?1:active==='dsm'?2:1;
     pulses.forEach((pulse,i)=>{
-      pulse.style.opacity=motion&&route===i?'1':'0';
-      if(!motion||route!==i)return;
+      const selected=route===Number(pulse.dataset.pulseRoute);
+      pulse.style.opacity=motion&&selected?'1':'0';
+      if(!motion||!selected)return;
       const point=paths[i].getPointAtLength(((time*.16)%1)*lengths[i]);
       pulse.setAttribute('cx',String(point.x));pulse.setAttribute('cy',String(point.y));
     });
